@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      #map {
+        height: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        //Localizacion de la escuela
+        //var escuela = {lat: 38.875937,lng: -6.954348};
+        var escuela = new google.maps.LatLng(38.875937, -6.954348);
+
+        //Generamos el mapa, con las cordenadas y el zoom que queremos.
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: escuela,
+          zoom: 15
+        });
+
+        //Informacion
+        var info = new google.maps.InfoWindow();
+        info.setContent("COL. Escuela Virgen de Guadalupe<br>");
+        info.setPosition(escuela);
+        info.open(map);
+        map.addListener('zoom_changed',function (){
+          info.setContent("Prueba");
+          info.open(map);
+        })
+      }
+    </script>
+    <!--Url con la api key-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBipx2E1kuEazpltQhFEnF4jhD8aoEv5x0&callback=initMap"
+    async defer></script>
+  </body>
+</html>
